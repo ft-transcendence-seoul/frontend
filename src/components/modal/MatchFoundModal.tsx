@@ -15,7 +15,7 @@ function UserDisplay({ user, type }: UserDisplayProps) {
     <FlexBox
       className={`gap-9 p-6 rounded-2xl border-[3px] border-white bg-gray-700 ${dropShadow}`}
     >
-      <Avatar type={user.info.avatar} />
+      <Avatar type={user.info.avatarImgPath} />
       <FlexBox direction="col" className="w-[100px] gap-3">
         <div className="w-full">{user.info.nickname}</div>
         <div className="w-full">{user.info.ladderPoint} LP</div>

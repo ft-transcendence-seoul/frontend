@@ -9,7 +9,7 @@ interface UserAbstract {
   id: number;
   nickname: string;
   ladderPoint: number;
-  avatar: 0 | 1 | 2 | 3 | 4;
+  avatarImgPath: string | null;
 }
 async function getUserList(): Promise<AxiosResponse<UserAbstract[]>> {
   return axios.get("/api/users");
@@ -41,11 +41,7 @@ async function putUserMe(params: UserDetail): Promise<AxiosResponse> {
 async function putUserMeAvatar(avatar: File): Promise<AxiosResponse> {
   const formData = new FormData();
   formData.append("file", avatar);
-  return axios.put("/api/users/me/avatar", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return axios.put("/api/users/me/avatar", formData);
 }
 
 async function getUser(id: number): Promise<AxiosResponse<UserDetail>> {

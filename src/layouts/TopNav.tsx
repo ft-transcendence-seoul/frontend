@@ -64,6 +64,7 @@ export default function TopNav() {
     try {
       await logout();
       await router.push("/login");
+
       router.reload();
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>;
