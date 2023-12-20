@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-function connectSocket(session: string) {
+function connectSocket() {
   console.log("connectSocket");
 
   const uri =
@@ -8,9 +8,6 @@ function connectSocket(session: string) {
 
   const socket = io(uri, {
     withCredentials: true,
-    extraHeaders: {
-      Authorization: session,
-    },
   });
 
   return socket;

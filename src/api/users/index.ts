@@ -13,7 +13,7 @@ interface UserAbstract {
   avatarImgPath: string | null;
 }
 async function getUserList(): Promise<AxiosResponse<UserAbstract[]>> {
-  return api.get("/api/users");
+  return api.get("/users");
 }
 
 interface UserDetail extends UserAbstract {
@@ -32,22 +32,22 @@ interface UserDetail extends UserAbstract {
 }
 
 async function getUserMe(): Promise<AxiosResponse<UserDetail>> {
-  return api.get("/api/users/me");
+  return api.get("/users/me");
 }
 
 async function putUserMe(params: UserDetail): Promise<AxiosResponse> {
-  return api.put("/api/users/me", params);
+  return api.put("/users/me", params);
 }
 
 async function putUserMeAvatar(avatar: File): Promise<AxiosResponse> {
   const formData = new FormData();
   formData.append("file", avatar);
   console.log(formData.get("file"));
-  return api.put("/api/users/me/avatar", formData);
+  return api.put("/users/me/avatar", formData);
 }
 
 async function getUser(id: number): Promise<AxiosResponse<UserDetail>> {
-  return api.get(`/api/users/${id}`);
+  return api.get(`/users/${id}`);
 }
 
 export type { UserAbstract, UserDetail, OtherUserAbstract };

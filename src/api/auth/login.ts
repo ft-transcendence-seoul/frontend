@@ -2,11 +2,11 @@ import { api } from "@/api/network";
 import { AxiosResponse } from "axios";
 
 export function login(uri: string): Promise<AxiosResponse<{ data: string }>> {
-  return api.get(`/api/auth/sign-in?callback_uri=${uri}`);
+  return api.get(`/auth/sign-in?callback_uri=${uri}`);
 }
 
 export function logout(): Promise<AxiosResponse> {
-  return api.post("/api/auth/logout", {});
+  return api.post("/auth/logout", {});
 }
 
 export function userRedirect(
@@ -17,12 +17,12 @@ export function userRedirect(
   AxiosResponse<{ session?: string; redirect: "home" | "register" | "2FA" }>
 > {
   return api.get(
-    `/api/auth/user-redirect?code=${code}&state=${state}&callback_uri=${uri}`
+    `/auth/user-redirect?code=${code}&state=${state}&callback_uri=${uri}`
   );
 }
 
 export function register(
   nickname: string
 ): Promise<AxiosResponse<{ session?: string }>> {
-  return api.post("/api/auth/register", { nickname });
+  return api.post("/auth/register", { nickname });
 }

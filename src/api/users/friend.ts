@@ -1,4 +1,4 @@
-import { OtherUserAbstract } from "@/api/users/index";
+import { OtherUserAbstract } from "@/users/index";
 import { api } from "@/api/network";
 import { AxiosResponse } from "axios";
 
@@ -11,27 +11,27 @@ interface Friend {
 }
 
 async function getFriendList(): Promise<AxiosResponse<OtherUserAbstract[]>> {
-  return api.get("/api/user-relation/friends");
+  return api.get("/user-relation/friends");
 }
 
 async function getFriendRelationList(): Promise<AxiosResponse<Friend[]>> {
-  return api.get("/api/user-relation/friends/relations");
+  return api.get("/user-relation/friends/relations");
 }
 
 async function postRequestFriend(id: number): Promise<AxiosResponse> {
-  return api.post(`/api/user-relation/friends/${id}/request`, {});
+  return api.post(`/user-relation/friends/${id}/request`, {});
 }
 
 async function approveFriend(id: number): Promise<AxiosResponse> {
-  return api.put(`/api/user-relation/friends/${id}/accept`, {});
+  return api.put(`/user-relation/friends/${id}/accept`, {});
 }
 
 async function denyFriend(id: number): Promise<AxiosResponse> {
-  return api.delete(`/api/user-relation/friends/${id}/reject`);
+  return api.delete(`/user-relation/friends/${id}/reject`);
 }
 
 async function deleteFriend(id: number): Promise<AxiosResponse> {
-  return api.delete(`/api/user-relation/friends/${id}/disconnect`);
+  return api.delete(`/user-relation/friends/${id}/disconnect`);
 }
 
 export {
