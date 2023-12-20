@@ -33,8 +33,19 @@ export default function ProfileCard({ type, user, setUser }: Props) {
     if (type === "other") return;
     if (!setUser || !user) return;
     if (file === undefined) return;
-    const res = await putUserMeAvatar(file);
-    console.log(res);
+    try {
+      console.log(file);
+      await putUserMeAvatar(file);
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      if (axiosError.response?.status === 401) {
+        router.push("/login");
+        return;
+      }
+      if (typeof axiosError.response?.data.message === "object")
+        toast.error(axiosError.response?.data.message[0]);
+      else toast.error(axiosError.response?.data.message);
+    }
   };
   const onClickTwoFactor = async () => {
     if (!setUser || !user) return;
@@ -105,7 +116,7 @@ export default function ProfileCard({ type, user, setUser }: Props) {
             <div className="mt-2 text-gray-300 font-bold">{user?.email}</div>
           </div>
           <div className="relative">
-            <Avatar type={user?.avatar ?? null} />
+            <Avatar type={user?.avatarImgPath ?? null} />
             {type === "me" && (
               <label htmlFor="file">
                 <FlexBox
