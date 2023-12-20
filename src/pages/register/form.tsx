@@ -1,4 +1,5 @@
 import { register } from "@/api/auth/login";
+import SpinningLoad from "@/components/SpinningLoad";
 import Button from "@/layouts/Button";
 import FlexBox from "@/layouts/FlexBox";
 import SideBox from "@/layouts/SideBox";
@@ -10,6 +11,7 @@ import { toast } from "react-toastify";
 
 export default function Register() {
   const router = useRouter();
+  const [isClicked, setIsClicked] = useState(false);
   const [nickName, setNickName] = useState("");
 
   const myInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +20,7 @@ export default function Register() {
 
   const onClickBtn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsClicked(true);
     try {
       const res = await register(nickName);
       if (res.data?.session !== undefined && res.data?.session !== null) {
@@ -34,6 +37,7 @@ export default function Register() {
         toast.error(axiosError.response?.data.message[0]);
       else toast.error(axiosError.response?.data.message);
     }
+    setIsClicked(false);
   };
 
   return (
@@ -66,7 +70,7 @@ export default function Register() {
           className="border rounded w-[25rem] h-[3rem] bg-gray-500"
           textClassName="font-bold text-2xl tracking-wider"
         >
-          Complete
+          {isClicked ? <SpinningLoad /> : "test1 로그인"}
         </Button>
       </FlexBox>
     </SideBox>
