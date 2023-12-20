@@ -1,22 +1,15 @@
+import { apiUrl } from "@/api/network";
 import Image from "next/image";
-
-export const avatarObj = {
-  0: "sample",
-  1: "pingpong",
-  2: "cat",
-  3: "dog",
-  4: "tiger",
-};
-
 interface Props {
-  type: keyof typeof avatarObj;
+  type: string | null;
 }
 
 export default function Avatar({ type }: Props) {
+  console.log(type);
   return (
     <div className={`min-w-[80px] w-[80px] h-[80px]`}>
       <Image
-        src={`/avatar/${avatarObj[type]}.jpg`}
+        src={type ? apiUrl + "/" + type : "/avatar/default.png"}
         alt="avatar"
         width={80}
         height={80}

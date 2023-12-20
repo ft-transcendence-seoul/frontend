@@ -13,7 +13,7 @@ export default function MatchEndModal({ info, onClick }: Props) {
   return (
     <ModalCard className="min-w-[600px]">
       <FlexBox className="justify-between gap-8 mb-8">
-        <Avatar type={info.user.avatar} />
+        <Avatar type={info.user.avatarImgPath} />
         <FlexBox className="h-[100px] w-full justify-between">
           <div className="w-2/3">
             <div className="w-full text-2xl mb-4">{info.user.nickname}</div>

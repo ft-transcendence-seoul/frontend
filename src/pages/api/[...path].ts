@@ -38,6 +38,7 @@ export default async function handler(
         rejectUnauthorized: false,
       }),
       headers: {
+        "Content-Type": req.headers["content-type"],
         Cookie: req.headers.cookie,
       },
     };
