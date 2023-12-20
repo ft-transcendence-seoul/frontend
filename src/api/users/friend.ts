@@ -1,5 +1,5 @@
-import { OtherUserAbstract } from "@/users/index";
 import { api } from "@/api/network";
+import { OtherUserAbstract } from "@/api/users/index";
 import { AxiosResponse } from "axios";
 
 interface Friend {

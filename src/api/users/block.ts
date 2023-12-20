@@ -1,5 +1,5 @@
 import { api } from "@/api/network";
-import { OtherUserAbstract } from "@/users/index";
+import { OtherUserAbstract } from "@/api/users/index";
 import { AxiosResponse } from "axios";
 
 async function getBlockList(): Promise<AxiosResponse<OtherUserAbstract[]>> {
