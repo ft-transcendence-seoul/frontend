@@ -70,7 +70,7 @@ export default function Register() {
           className="border rounded w-[25rem] h-[3rem] bg-gray-500"
           textClassName="font-bold text-2xl tracking-wider"
         >
-          {isClicked ? <SpinningLoad /> : "test1 로그인"}
+          {isClicked ? <SpinningLoad /> : "Complete"}
         </Button>
       </FlexBox>
     </SideBox>
