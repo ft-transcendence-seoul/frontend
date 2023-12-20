@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       "ec2-15-164-74-198.ap-northeast-2.compute.amazonaws.com",
-      "localhost:5500",
+      "localhost",
     ],
   },
 };

@@ -8,9 +8,6 @@ const api = axios.create({
   validateStatus: (status) => {
     return status < 400;
   },
-  headers: {
-    "Content-Type": "application/json",
-  },
   withCredentials: true,
 });
 

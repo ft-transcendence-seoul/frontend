@@ -1,6 +1,6 @@
-import axios from "axios";
+import { api } from "@/api/network";
 
 function testLogin(id: number) {
-  return axios.get(`/api/auth/login/user${id}@example.com`);
+  return api.get(`/auth/login/user${id}@example.com`);
 }
 export { testLogin };
