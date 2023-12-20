@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import { api } from "@/api/network";
+import { AxiosResponse } from "axios";
 
 interface Channel {
   id: number;
@@ -7,7 +8,7 @@ interface Channel {
 }
 
 async function getChannelList(): Promise<AxiosResponse<Channel[]>> {
-  return axios.get("/api/channels");
+  return api.get("/api/channels");
 }
 
 interface MemberAbstract {
@@ -25,7 +26,7 @@ interface SpecificChannel extends Channel {
 async function getChannel(
   channel_id: number
 ): Promise<AxiosResponse<SpecificChannel>> {
-  return axios.get(`/api/channels/${channel_id}`);
+  return api.get(`/api/channels/${channel_id}`);
 }
 
 interface Props {
@@ -35,7 +36,7 @@ interface Props {
 }
 
 async function createChannel({ title, type, password }: Props) {
-  return axios.post("/api/channels", { title, type, password });
+  return api.post("/api/channels", { title, type, password });
 }
 
 async function updateChannel(
@@ -43,31 +44,37 @@ async function updateChannel(
   { title, type, password }: Props
 ) {
   if (type === "protected" && password !== "")
-    return axios.put(`/api/channels/${channel_id}`, { title, type, password });
-  return axios.put(`/api/channels/${channel_id}`, { title, type });
+    return api.put(`/api/channels/${channel_id}`, { title, type, password });
+  return api.put(`/api/channels/${channel_id}`, { title, type });
 }
 
 async function joinChannel(channel_id: number, password: string) {
   if (password != "")
-    return axios.post(`/api/channels/${channel_id}`, {
+    return api.post(`/api/channels/${channel_id}`, {
       providedPassword: password,
     });
-  return axios.post(`/api/channels/${channel_id}`, {});
+  return api.post(`/api/channels/${channel_id}`, {});
 }
 
 async function leaveChannel(channel_id: number) {
-  return axios.delete(`/api/channels/${channel_id}`);
+  return api.delete(`/api/channels/${channel_id}`);
 }
 
-interface MyChannel extends Channel{
+interface MyChannel extends Channel {
   role: "Owner" | "Admin" | "User";
 }
 
 async function getMyChannels(): Promise<AxiosResponse<MyChannel[]>> {
-  return axios.get("/api/channels/me");
+  return api.get("/api/channels/me");
 }
 
-export type { Channel, MyChannel, SpecificChannel, MemberAbstract, MemberDetail};
+export type {
+  Channel,
+  MyChannel,
+  SpecificChannel,
+  MemberAbstract,
+  MemberDetail,
+};
 export {
   getChannelList,
   getChannel,

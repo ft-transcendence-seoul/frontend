@@ -1,16 +1,17 @@
+import { api } from "@/api/network";
 import { OtherUserAbstract } from "@/api/users/index";
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 
 async function getBlockList(): Promise<AxiosResponse<OtherUserAbstract[]>> {
-  return axios.get("/api/user-relation/block");
+  return api.get("/api/user-relation/block");
 }
 
 async function postBlock(user_id: number) {
-  return axios.post(`/api/user-relation/block/${user_id}`, {});
+  return api.post(`/api/user-relation/block/${user_id}`, {});
 }
 
 async function deleteBlock(user_id: number) {
-  return axios.delete(`/api/user-relation/block/${user_id}`);
+  return api.delete(`/api/user-relation/block/${user_id}`);
 }
 
 export { getBlockList, postBlock, deleteBlock };

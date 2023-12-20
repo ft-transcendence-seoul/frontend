@@ -45,8 +45,13 @@ export default async function handler(
     if (req.method === "POST" || req.method === "PUT") {
       requestToServer.data = req.body;
     }
+    console.info("헤더 :", requestToServer.headers);
+    //console.info("바디 :", requestToServer.data);
+    console.info();
     const axiosRes = await api.request(requestToServer);
     console.info("응답이 왔어요");
+    console.info("보낸 바디 :", axiosRes.config.data);
+    console.info("보낸 헤더 :", axiosRes.config.headers);
     console.info("헤더 :", axiosRes.headers);
     console.info("바디 :", axiosRes.data);
     console.info();
