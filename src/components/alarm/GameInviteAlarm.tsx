@@ -1,5 +1,6 @@
 import { acceptGame, rejectGame } from "@/api/games/index";
 import ChipButton from "@/components/button/ChipButton";
+import { useNoti } from "@/hooks/data/useNoti";
 import FlexBox from "@/layouts/FlexBox";
 import { NotiGameInvite } from "@/socket/notification";
 import { AxiosError } from "axios";
@@ -12,10 +13,12 @@ interface GameInviteAlarmProps {
 }
 
 export default function GameInviteAlarm({ noti, idx }: GameInviteAlarmProps) {
+  const { removeNoti } = useNoti();
   const router = useRouter();
   const acceptClick = async () => {
     try {
       await acceptGame(noti.invitingUser.id);
+      removeNoti(idx);
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>;
       if (axiosError.response?.status === 401) {
@@ -30,6 +33,7 @@ export default function GameInviteAlarm({ noti, idx }: GameInviteAlarmProps) {
   const rejectClick = async () => {
     try {
       await rejectGame(noti.invitingUser.id);
+      removeNoti(idx);
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>;
       if (axiosError.response?.status === 401) {
@@ -44,7 +48,7 @@ export default function GameInviteAlarm({ noti, idx }: GameInviteAlarmProps) {
   return (
     <FlexBox className="w-full justify-between">
       <div>
-        <span>{noti.invitingUser.nickname}</span>
+        <span className="text-lightblue-cyber">{noti.invitingUser.nickname}</span>
         <span>님이 게임에 초대했습니다.</span>
       </div>
       <FlexBox className="w-fit h-fit gap-3">
