@@ -60,12 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
       )
     ) {
       if (socket.connected === undefined) {
-        const session = sessionStorage.getItem("session");
-        if (session === null) {
-          router.push("/login");
-          return;
-        }
-        const socketInstance = connectSocket(session ?? "");
+        const socketInstance = connectSocket();
         socketInstance.on("connect", () => {
           console.log("socket connected");
           getUserMe()

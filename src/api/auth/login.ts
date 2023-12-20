@@ -1,11 +1,12 @@
-import axios, { AxiosResponse } from "axios";
+import { api } from "@/api/network";
+import { AxiosResponse } from "axios";
 
 export function login(uri: string): Promise<AxiosResponse<{ data: string }>> {
-  return axios.get(`/api/auth/sign-in?callback_uri=${uri}`);
+  return api.get(`/auth/sign-in?callback_uri=${uri}`);
 }
 
 export function logout(): Promise<AxiosResponse> {
-  return axios.post("/api/auth/logout", {});
+  return api.post("/auth/logout", {});
 }
 
 export function userRedirect(
@@ -15,8 +16,8 @@ export function userRedirect(
 ): Promise<
   AxiosResponse<{ session?: string; redirect: "home" | "register" | "2FA" }>
 > {
-  return axios.get(
-    `/api/auth/user-redirect?code=${code}&state=${state}&callback_uri=${uri}`
+  return api.get(
+    `/auth/user-redirect?code=${code}&state=${state}&callback_uri=${uri}`
   );
 }
 
@@ -27,8 +28,8 @@ export function register(
   if (file !== null) {
     const formData = new FormData();
     formData.append("files", file);
-    return axios.post(
-      "/api/auth/register",
+    return api.post(
+      "/auth/register",
       { nickname, formData },
       {
         headers: {
@@ -37,5 +38,5 @@ export function register(
       }
     );
   }
-  return axios.post("/api/auth/register", { nickname });
+  return api.post("/auth/register", { nickname });
 }
