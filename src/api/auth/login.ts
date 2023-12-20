@@ -29,7 +29,7 @@ export function register(
     const formData = new FormData();
     formData.append("files", file);
     return api.post(
-      "/api/auth/register",
+      "/auth/register",
       { nickname, formData },
       {
         headers: {
@@ -38,5 +38,5 @@ export function register(
       }
     );
   }
-  return api.post("/api/auth/register", { nickname });
+  return api.post("/auth/register", { nickname });
 }
