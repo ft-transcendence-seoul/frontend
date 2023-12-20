@@ -1,9 +1,8 @@
 import { TFAOff } from "@/api/auth/2fa";
 import { UserDetail, putUserMe, putUserMeAvatar } from "@/api/users/index";
-import Avatar, { avatarObj } from "@/components/Avatar";
+import Avatar from "@/components/Avatar";
 import ChipButton from "@/components/button/ChipButton";
 import DefaultInput from "@/components/control/DefaultInput";
-import AvatarModal from "@/components/modal/AvatarModal";
 import TFAModal from "@/components/modal/TFAModal";
 import { useModal } from "@/hooks/display/useModal";
 import Card from "@/layouts/Card";
@@ -106,7 +105,7 @@ export default function ProfileCard({ type, user, setUser }: Props) {
             <div className="mt-2 text-gray-300 font-bold">{user?.email}</div>
           </div>
           <div className="relative">
-            <Avatar type={user?.avatar ?? 0} />
+            <Avatar type={user?.avatar ?? null} />
             {type === "me" && (
               <label htmlFor="file">
                 <FlexBox

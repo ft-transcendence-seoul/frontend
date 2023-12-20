@@ -9,7 +9,7 @@ interface UserAbstract {
   id: number;
   nickname: string;
   ladderPoint: number;
-  avatar: 0 | 1 | 2 | 3 | 4;
+  avatar: string | null;
 }
 async function getUserList(): Promise<AxiosResponse<UserAbstract[]>> {
   return axios.get("/api/users");
